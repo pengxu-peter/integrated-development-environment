@@ -76,4 +76,4 @@ services:
 
  
 # 3. 参考文件：
->[vscode官方remote-container配置资料](https://github.com/microsoft/vscode-docs/blob/master/docs/remote/containers.m)
+>[vscode官方remote-container配置资料](https://github.com/microsoft/vscode-docs/blob/master/docs/remote/containers.md)
