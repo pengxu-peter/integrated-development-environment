@@ -1,0 +1,15 @@
+{
+	"name": "C++",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "cpp_build_env",
+	"workspaceFolder": "/opt/alpha/cmake/Alpha",
+	"remote.containers.defaultExtensions": [
+		"vector-of-bool.cmake-tools",
+		"twxs.cmake",
+		"ms-vscode.cpptools"
+	],
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+	"shutdownAction": "stopCompose", //"none"
+}
