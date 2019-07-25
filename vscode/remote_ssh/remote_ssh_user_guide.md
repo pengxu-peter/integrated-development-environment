@@ -11,22 +11,22 @@
 在windows端安装Visual Studio Code，并添加扩展“Remote - SSH”
 ### 2.1.2 配置密钥对直接登录ssh
 1. 本地win10生成密钥对
-```cpp
-// win10以下版本需要自行提前安装ssh服务
-// 默认路径
+```bash
+# win10以下版本需要自行提前安装ssh服务
+# 默认路径
 ssh-keygen -t rsa -b 4096
-// 指定路径：C:\DevEnv\conf\ssh
+# 指定路径：C:\DevEnv\conf\ssh
 ssh-keygen -t rsa -b 4096 -f C:\DevEnv\conf\ssh\id_rsa
 ```
 2.  远程Linux主机配置：上传生成的密钥对(id_rsa和id_rsa.pub)到Linux的相应用户下，执行：
-```cpp
-// 我这里的服务器ip是 172.16.100.57
+```bash
+# 我这里的服务器ip是 172.16.100.57
 ssh-copy-id -i id_rsa.pub 172.16.100.57
 ```
 3. 验证是否配置成功：在密钥存放的路径打开终端，然后执行如下代码
-```cpp
+```bash
 ssh xupeng@172.16.100.57 -i ./id_rsa
-//可以在不输入密码情况下ssh进入linux服务器
+#可以在不输入密码情况下ssh进入linux服务器
 ```
 ## 2.2 工程配置
 ### 2.2.1 ssh连接
@@ -34,7 +34,7 @@ ssh xupeng@172.16.100.57 -i ./id_rsa
 - 步骤1：点击位置0的远程图标；
 - 步骤2：点击位置1的设置图标；
 - 步骤3：选择当前windows系统路径下“.ssh”目录下创建config文件（默认选择位置2的第一个），进行如下配置：
-```python
+```bash
 # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
 Host 172.16.100.57
     HostName 172.16.100.57
@@ -65,7 +65,7 @@ Host 172.16.100.57
 - ssh服务（apt-get install openssh-server）
 - gdb服务（apt-get install gdb gdbserver）
 2. docker-compose.yml文件配置
-```cpp
+```bash
 version: '2.4'
 services:
   cpp_build_env:
@@ -73,9 +73,9 @@ services:
     restart: always
     environment:
       - LANG=C.UTF-8
-    ports:                             //需要将ssh的22端口号映射出来
+    ports:                             #需要将ssh的22端口号映射出来
       - "101:22"
-    security_opt:                      //保证可以正常使用gdb调试
+    security_opt:                      #保证可以正常使用gdb调试
       - seccomp:unconfined
     container_name: alpha_cpp_build
     volumes:
@@ -88,9 +88,9 @@ services:
     mem_limit: 20G
 ```
 3. 启动docker生成container：
-```cpp
-docker-compose up -d                 //生成container在后台运行
-docker exec -it alpha_cpp_build bash //进入container内部
+```bash
+docker-compose up -d                 #生成container在后台运行
+docker exec -it alpha_cpp_build bash #进入container内部
 ```
 4. 修改container内部配置：
 - 设置container用户root的密码：
@@ -103,18 +103,18 @@ passwd 123456
 service ssh restart
 ```
 5. 验证：在windows的cmd下运行
-```cpp
-ssh root@172.16.100.57 -p 101   //登录密码：上面步骤4设置的123456
+```bash
+ssh root@172.16.100.57 -p 101   #登录密码：上面步骤4设置的123456
 ```
 ## 3.2 环境配置 - ssh密钥登录
 1. 添加公钥到root配置文件
-```cpp
-// 1. 在docker内部将公钥添加到系统文件
+```bash
+# 1. 在docker内部将公钥添加到系统文件
 cat id_rsa.pub >> /root/.ssh/authorized_keys
-// 2. 修改文件权限
+# 2. 修改文件权限
 chmod 700 /root/.ssh
 chmod 600 /root/.ssh/*
-// 备注：以上两步理论上可以使用“ssh-copy-id -i id_rsa.pub 172.16.100.57”一次解决，但是出现permission问题，无法通过
+# 备注：以上两步理论上可以使用“ssh-copy-id -i id_rsa.pub 172.16.100.57”一次解决，但是出现permission问题，无法通过
 ```
 2. 测试是否成功：在windows端直接cmd运行
 ```
@@ -122,7 +122,7 @@ ssh root@172.16.100.57 -p 101 -i ./id_rsa
 ```
 ## 3.3 工程配置
 参考步骤[2.2](#2.2-工程配置)，只是需要将2.2.1的步骤3的config文件改为：
-```python
+```bash
 # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
 Host 172.16.100.57
     HostName 172.16.100.57

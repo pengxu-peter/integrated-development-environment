@@ -18,7 +18,7 @@ code
 
 ## 2.2 工程配置
 1. 编写'docker-compose.yml'文件及相关images准备
-```docker
+```bash
 version: '2.4'
 services:
   cpp_build_env:
