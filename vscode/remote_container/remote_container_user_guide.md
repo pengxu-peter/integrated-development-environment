@@ -1,6 +1,6 @@
 # 1. 引言
 ## 1.1 目的和范围
-将当前ALPHA工程，在docker的contanier环境下进行开发。
+将CPP的CMake工程ALPHA，在Linux操作系统使用Visual Studio Code，直接远程docker的contanier进行开发。
 
 ## 1.2 文档约定
 

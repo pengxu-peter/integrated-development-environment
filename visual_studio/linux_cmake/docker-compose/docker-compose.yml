@@ -1,0 +1,20 @@
+version: '2.4'
+services:
+  cpp_build_env:
+    image: cpp_build_env:1.0
+    restart: always
+    environment:
+      - LANG=C.UTF-8
+    ports:
+      - "101:22"
+    security_opt:
+      - seccomp:unconfined
+    container_name: alpha_cpp_build
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/alpha_cpp/cmake:/opt/alpha/cmake
+      - /home:/opt/alpha/host
+    network_mode:
+      bridge
+    shm_size: 16G
+    mem_limit: 20G

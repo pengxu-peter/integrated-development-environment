@@ -1,6 +1,6 @@
 # 1. 引言
 ## 1.1 目的和范围
-将当前ALPHA工程，远程ssh进行开发，分为直接在linux本地和docker两种情况。
+将CPP的CMake工程ALPHA，在Windows 10操作系统使用Visual Studio Code，SSH远程linux本地环境或Linux系统下docker的contanier环境进行开发。
 
 ## 1.2 文档约定
 
@@ -60,16 +60,17 @@ Host 172.16.100.57
 
 # 3. remote_ssh 基于linux环境的docker的设置方法
 ## 3.1 环境配置 - ssh密码登录
-1. 准备docker镜像：默认安装以下必备材料
+准备docker镜像：默认安装以下必备材料
 - ALPHA相关库文件和头文件；
-- ssh服务（apt-get install openssh-server）
+- ssh服务（apt-get install openssh-server）,/etc/ssh/sshd_config文件中PermitRootLogin的值为yes
 - gdb服务（apt-get install gdb gdbserver）
+- container用户root的密码：123456
 2. docker-compose.yml文件配置
 ```bash
 version: '2.4'
 services:
   cpp_build_env:
-    image: ffrct:1.0
+    image: cpp_build_env:1.0
     restart: always
     environment:
       - LANG=C.UTF-8
@@ -90,22 +91,17 @@ services:
 3. 启动docker生成container：
 ```bash
 docker-compose up -d                 #生成container在后台运行
+```
+4. 开启container内部ssh配置：
+```bash
 docker exec -it alpha_cpp_build bash #进入container内部
-```
-4. 修改container内部配置：
-- 设置container用户root的密码：
-```
-passwd 123456
-```
-- 配置ssh远程登录：修改/etc/ssh/sshd_config文件中PermitRootLogin的值为yes
-- 重启ssh服务：
-```
-service ssh restart
+service ssh restart                  #重启ssh服务（第一次执行出现fail，第二次成功）
 ```
 5. 验证：在windows的cmd下运行
 ```bash
-ssh root@172.16.100.57 -p 101   #登录密码：上面步骤4设置的123456
+ssh root@172.16.100.57 -p 101   #登录密码：默认设置的123456
 ```
+
 ## 3.2 环境配置 - ssh密钥登录
 1. 添加公钥到root配置文件
 ```bash
