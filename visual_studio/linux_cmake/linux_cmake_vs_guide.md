@@ -13,11 +13,11 @@
 4. 安装完，直接打开Visual Studio 2019。
 
 ## 2.2 Linux环境下SSH配置
-准备docker镜像：默认安装以下必备材料
-- ALPHA相关库文件和头文件；
-- ssh服务（apt-get install openssh-server）,/etc/ssh/sshd_config文件中PermitRootLogin的值为yes
-- gdb服务（apt-get install gdb gdbserver）
-- container用户root的密码：123456
+1. 准备docker镜像：默认安装以下必备材料
+  - ALPHA相关库文件和头文件；
+  - ssh服务（apt-get install openssh-server）,/etc/ssh/sshd_config文件中PermitRootLogin的值为yes
+  - gdb服务（apt-get install gdb gdbserver）
+  - container用户root的密码：123456
 2. docker-compose.yml文件配置
 ```bash
 version: '2.4'
