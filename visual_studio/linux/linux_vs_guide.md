@@ -8,11 +8,11 @@
 # 2 环境配置
 # 2.1 Linux端环境配置
 1. 配置固定IP：如下图Fig1所示；
-<center>
+<p align="center">
     <img src="imgs/1.2.2.0-0.png" height = "250" >
     <br>
     <div>Fig 1 IP配置</div>
-</center>
+</p>
 
 2. 配置项目路径：如下图Fig2所示，建立文件夹RegLungProject；
 
@@ -29,20 +29,20 @@ Fig 2 配置项目 | Fig 3 配置第三方库
 # 3 项目配置
 # 3.1 创建Linux跨平台工程
 在Windows端打开VS2017，新建项目，选择“跨平台”—>“空项目(Linux)”，设置“项目名称、路径位置、解决方案名称”，如下图Fig4所示。
-<center>
+<p align="center">
     <img src="imgs/1.2.2.1.png" height = "250" >
     <br>
     <div>Fig 4 IP配置</div>
-</center>
+</p>
 
 # 3.2 配置项目生成状态
 右键项目名称，选择“属性”，选择“所有配置”，然后：
 - 在“配置属性->常规->远程生成计算机/远程生成根目录”进行Ubantu环境下的相应配置，然后确定保存 
-<center>
+<p align="center">
     <img src="imgs/1.2.2.2.png" height = "250" >
     <br>
     <div>Fig 5</div>
-</center>
+</p>
 
 - 在“配置属性->常规->输出目录”进行输出目录配置，对于release和debug两个情况分开配置
 
@@ -52,18 +52,18 @@ Fig 6 | Fig 7
 
 - 在“配置属性->项目默认值->配置类型”进行输出类型配置，如果是动态链接库，需要选择“动态库(.so)”
 
-<center>
+<p align="center">
     <img src="imgs/1.2.2.3.png" height = "250" >
     <br>
     <div>Fig 8</div>
-</center>
+</p>
 
 - 在“VC++目录->常规->包含目录”添加需要引用的头文件目录（头文件存放在windows环境下）
-<center>
+<p align="center">
     <img src="imgs/1.2.2.4.png" height = "250" >
     <br>
     <div>Fig 9</div>
-</center>
+</p>
 
 > 备注：windows支持linux的文件夹路径标准，所以相对路径的设置都是用斜杠“/”，而非反斜杠“\”。
 
@@ -95,22 +95,22 @@ Fig 14 | Fig 15
 
 2. 在“配置属性->链接器->输入->库依赖项”添加所需的库文件名
 
-<center>
+<p align="center">
     <img src="imgs/1.2.3.5.png" height = "250" >
     <br>
     <div>Fig 16</div>
-</center>
+</p>
 
 > 备注：需要去除文件的后缀和lib前缀。
 
 # 4.5 项目build
 右键项目名称，选择“生成”。生成之后，可以发现，在ubantu系统下，对应的输出目录下，有“.so”文件生成。
 
-<center>
+<p align="center">
     <img src="imgs/1.2.4.0.png" height = "250" >
     <br>
     <div>Fig 17</div>
-</center>
+</p>
 
 # 4.6 项目debug
 1. 右键需要debug的项目，选择“设为启动项目”；
