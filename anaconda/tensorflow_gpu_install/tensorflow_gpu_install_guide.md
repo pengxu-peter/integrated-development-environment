@@ -40,7 +40,7 @@ lspci|grep NVIDIA
 <p align="center">
     <img src="imgs/ubantu_drive.png" height = "250" >
     <br>
-    <div>Fig 1 Ubantu软件与更新</div>
+    <div align="center">Fig 1 Ubantu软件与更新</div>
 </p>
 
 - 使用第三方源安装

@@ -11,7 +11,7 @@
 <p align="center">
     <img src="imgs/1.2.2.0-0.png" height = "250" >
     <br>
-    <div>Fig 1 IP配置</div>
+    <div align="center">Fig 1 IP配置</div>
 </p>
 
 2. 配置项目路径：如下图Fig2所示，建立文件夹RegLungProject；
@@ -32,7 +32,7 @@ Fig 2 配置项目 | Fig 3 配置第三方库
 <p align="center">
     <img src="imgs/1.2.2.1.png" height = "250" >
     <br>
-    <div>Fig 4 IP配置</div>
+    <div align="center">Fig 4 IP配置</div>
 </p>
 
 # 3.2 配置项目生成状态
@@ -41,7 +41,7 @@ Fig 2 配置项目 | Fig 3 配置第三方库
 <p align="center">
     <img src="imgs/1.2.2.2.png" height = "250" >
     <br>
-    <div>Fig 5</div>
+    <div align="center">Fig 5</div>
 </p>
 
 - 在“配置属性->常规->输出目录”进行输出目录配置，对于release和debug两个情况分开配置
@@ -55,14 +55,14 @@ Fig 6 | Fig 7
 <p align="center">
     <img src="imgs/1.2.2.3.png" height = "250" >
     <br>
-    <div>Fig 8</div>
+    <div align="center">Fig 8</div>
 </p>
 
 - 在“VC++目录->常规->包含目录”添加需要引用的头文件目录（头文件存放在windows环境下）
 <p align="center">
     <img src="imgs/1.2.2.4.png" height = "250" >
     <br>
-    <div>Fig 9</div>
+    <div align="center">Fig 9</div>
 </p>
 
 > 备注：windows支持linux的文件夹路径标准，所以相对路径的设置都是用斜杠“/”，而非反斜杠“\”。
@@ -98,7 +98,7 @@ Fig 14 | Fig 15
 <p align="center">
     <img src="imgs/1.2.3.5.png" height = "250" >
     <br>
-    <div>Fig 16</div>
+    <div align="center">Fig 16</div>
 </p>
 
 > 备注：需要去除文件的后缀和lib前缀。
@@ -109,7 +109,7 @@ Fig 14 | Fig 15
 <p align="center">
     <img src="imgs/1.2.4.0.png" height = "250" >
     <br>
-    <div>Fig 17</div>
+    <div align="center">Fig 17</div>
 </p>
 
 # 4.6 项目debug
