@@ -10,14 +10,22 @@
 1. Visual Studio Code
     - [Windows操作系统SSH远程linux进行CMake开发](vscode/remote_ssh/remote_ssh_user_guide.md)
     - [Linux操作系统远程docker-container进行CMake开发](vscode/remote_container/remote_container_user_guide.md)
+  
 2. Visual Studio
     - [Windows操作系统SSH远程linux直接开发](visual_studio/linux/linux_vs_guide.md)
     - [Windows操作系统SSH远程linux进行CMake开发](visual_studio/linux_cmake/linux_cmake_vs_guide.md)
+  
 3. Anaconda
     - [python第三发库安装](anaconda/python_lib_install/python_lib_install_guide.md)
-    - [conda创建python环境](anaconda/conda_dev_env/conda_dev_env_guide.md)
     - [Ubuntu环境tensorflow_gpu环境搭建](anaconda/tensorflow_gpu_install/tensorflow_gpu_install_guide.md)
+  
+4. 开发环境搭建
+    - [虚拟环境搭建](environment_management\virtualenv\virtualenv_user_guide.md)
+    - [docker搭建](environment_management\docker\docker_user_guide.md)
 
-
+5. 版本管理
+    - [Git](version_management\git\git_cheatsheet.md)
+    - [SVN](version_management\svn\svn_cheatsheet.md)
+    - [CONAN](version_management\conan\conan_user_guide.md)
 
 
