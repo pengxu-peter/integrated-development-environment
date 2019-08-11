@@ -20,12 +20,12 @@
     - [Ubuntu环境tensorflow_gpu环境搭建](anaconda/tensorflow_gpu_install/tensorflow_gpu_install_guide.md)
   
 4. 开发环境搭建
-    - [虚拟环境搭建](environment_management\virtualenv\virtualenv_user_guide.md)
-    - [docker搭建](environment_management\docker\docker_user_guide.md)
+    - [虚拟环境搭建](environment_management/virtualenv/virtualenv_user_guide.md)
+    - [docker搭建](environment_management/docker/docker_user_guide.md)
 
 5. 版本管理
-    - [Git](version_management\git\git_cheatsheet.md)
-    - [SVN](version_management\svn\svn_cheatsheet.md)
-    - [CONAN](version_management\conan\conan_user_guide.md)
+    - [Git](version_management/git/git_cheatsheet.md)
+    - [SVN](version_management/svn/svn_cheatsheet.md)
+    - [CONAN](version_management/conan/conan_user_guide.md)
 
 
