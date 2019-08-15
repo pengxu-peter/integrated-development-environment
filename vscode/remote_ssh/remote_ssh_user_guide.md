@@ -105,11 +105,10 @@ ssh root@172.16.100.57 -p 101   #登录密码：默认设置的123456
 ## 3.2 环境配置 - ssh密钥登录
 1. 添加公钥到root配置文件
 ```bash
-# 1. 在docker内部将公钥添加到系统文件
+# 1. 远程Linux主机配置：上传生成的密钥对(id_rsa和id_rsa.pub)到Linux的相应用户下，执行：
+ssh-copy-id -i id_rsa.pub 172.16.100.57
+# 2. 在docker内部将公钥添加到系统文件
 cat id_rsa.pub >> /root/.ssh/authorized_keys
-# 2. 修改文件权限
-chmod 700 /root/.ssh
-chmod 600 /root/.ssh/*
 # 备注：以上两步理论上可以使用“ssh-copy-id -i id_rsa.pub 172.16.100.57”一次解决，但是出现permission问题，无法通过
 ```
 2. 测试是否成功：在windows端直接cmd运行
