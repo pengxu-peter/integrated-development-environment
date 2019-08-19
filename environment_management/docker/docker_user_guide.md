@@ -74,6 +74,27 @@ sudo ln -s /home/data/docker /var/lib/docker
 sudo systemctl start docker
 ```
 
+## 3.3 添加国内镜像
+
+对于使用systemd的系统(Ubuntu 16.04+、Debian 8+、CentOS 7+)，可以创建`/etc/docker/daemon.json`文件，并写入如下内容：
+
+```bash
+{
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://registry.docker-cn.com"
+  ]
+}
+```
+
+然后重新启动Docker服务
+
+```bash
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+```
+
 # 4 docker常用命令
 
 ```bash
@@ -106,4 +127,9 @@ docker logs -f bedeac6bf61e
 # 停止容器
 docker stop python_alg_wangyaqi && docker rm python_alg_wangyaqi
 
+# 统计所有docker image 和 container
+docker system df
+
+# 清楚所有无效 image 和 container
+docker system prune
 ```
