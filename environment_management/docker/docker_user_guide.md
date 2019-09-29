@@ -105,6 +105,9 @@ docker ps -a
 # 导入导出镜像
 docker save -o image.tar proxima/tf_serving_cpu:v2.01
 docker load -i image.tar
+# gzip压缩导入导出
+docker save <myimage>:<tag> | gzip > <myimage>_<tag>.tar.gz
+gunzip -c <myimage>_<tag>.tar.gz | docker load
 
 # 删除镜像
 docker rmi proxima/tf_serving_cpu:v2.01
