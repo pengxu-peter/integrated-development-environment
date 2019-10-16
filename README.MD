@@ -27,5 +27,6 @@
     - [Git](version_management/git/git_cheatsheet.md)
     - [SVN](version_management/svn/svn_cheatsheet.md)
     - [CONAN](version_management/conan/conan_user_guide.md)
+    - [Harbor](version_management/harbor/harbor_cheatsheet.md)
 
 
