@@ -65,6 +65,15 @@ class VTKConan(ConanFile):
         self.cpp_info.debug.libdirs=['lib/Debug']
         self.cpp_info.release.libs = fnmatch.filter(os.listdir('lib/Release'), '*.lib')
         self.cpp_info.debug.libs = fnmatch.filter(os.listdir('lib/Debug'), '*.lib')
+        self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
+        self.cpp_info.resdirs = ['res']  # Directories where resources, data, etc can be found
+        self.cpp_info.bindirs = ['bin']  # Directories where executables and shared libs can be found
+        self.cpp_info.srcdirs = []  # Directories where sources can be found (debugging, reusing sources)
+        self.cpp_info.defines = []  # preprocessor definitions
+        self.cpp_info.cflags = []  # pure C flags
+        self.cpp_info.cxxflags = []  # C++ compilation flags
+        self.cpp_info.sharedlinkflags = []  # linker flags
+        self.cpp_info.exelinkflags = []  # linker flags
 ```
 4. 下面可以打包库了, 运行以下代码，运行该命令执行打包, 打包时执行了相应的arch和os, 因此针对同一个包可以打针对不同的操作系统和架构的包, 执行成功则该库已经成功打包到本地缓存中
 ```bash
@@ -83,7 +92,12 @@ conan upload <name> -r <server_name>   --all –force
 VTK/8.2.0@imaging/stable
  
 [generators]
-visual_studio    # cmake用于cmake工程
+visual_studio    # 生成vs工程
+cmake            # cmake用于cmake工程
+
+[imports]
+bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my local "bin" folder
+lib, *.dylib* -> ./bin # Copies all dylib files from packages lib folder to my local "bin" folder
 ```
 ## 4.2 下载和使用依赖库
 运行以下代码，则会根据指定的设置自动查找和下载相应的依赖库, 并生成conanbuildinfo.props, 在Visual Studio工程中的property manager里面加入该props文件, 则完成了对第三方库的依赖, 基本可以进行正常编译.

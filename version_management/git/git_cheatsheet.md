@@ -23,6 +23,8 @@ Git特点：
 
 # 2 安装Git环境
 ## 2.1 服务器端
+[参考文件](file/安装gitlab.docx)   
+Ref: https://about.gitlab.com/install/
 
 ## 2.2 客户端
 
