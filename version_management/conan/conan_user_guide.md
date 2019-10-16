@@ -21,6 +21,7 @@ conan remote add <server_name> <sever_url>
 ```bash
 conan search <name>                    #本地搜索
 conan search <name> -r <server_name>   #服务器搜索
+conan search --remote <server_name>    #查看全部安装包
 ```
 ## 3.3 创建一个包路径, 并conan包结构
 ```bash
