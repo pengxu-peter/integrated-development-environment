@@ -90,7 +90,7 @@ sudo mv /var/lib/docker /home/data/docker
 sudo ln -s /home/data/docker /var/lib/docker
 
 # 3 重新启动docker
-sudo systemctl start docker
+sudo systemctl restart docker #或者sudo systemctl daemon-reload
 ```
 
 ### 3.2.3 添加国内镜像
