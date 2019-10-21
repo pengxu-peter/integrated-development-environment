@@ -60,21 +60,40 @@ https://www.linuxidc.com/Linux/2019-07/159613.htm
 sudo usermod  -a -G docker xuepng
 ```
 
-## 3.2 修改docker加载路径
+## 3.2 修改docker的系统配置
+
+### 3.2.1 查看系统配置
 ```bash
-# 1. 停掉Docker服务
+docker info
+```
+<p align="center">
+    <img src="imgs/docker1.png" height = "400" >
+</p>
+
+### 3.2.2 修改docker加载路径Docker root dir
+```bash
+# 1 停掉Docker服务
 service docker stop #或者 systemctl restart docker
-# [2]. 保险起见，可以提前备份：
+
+################## 方法1：修改配置文件 ###################
+# 2.1 打开配置文件
+sudo vim /etc/docker/daemon.json
+# 2.2 增加一行信息，将默认位置修改为/opt/docker-data
+"data-root": "/opt/docker-data",
+
+################## 方法2：配置软链信息 ###################
+# [2.1] 保险起见，可以提前备份：
 tar -zcC /var/lib/docker >/mnt/var_lib_docker-backup-$(date + %s).tar.gz
-# 2. 迁移整个/var/lib/docker目录到目的路径
+# 2.2 迁移整个/var/lib/docker目录到目的路径
 sudo mv /var/lib/docker /home/data/docker
-# 3. 建立symlink软链接
+# 2.3 建立symlink软链接
 sudo ln -s /home/data/docker /var/lib/docker
-# 4. 重新启动docker
+
+# 3 重新启动docker
 sudo systemctl start docker
 ```
 
-## 3.3 添加国内镜像
+### 3.2.3 添加国内镜像
 
 对于使用systemd的系统(Ubuntu 16.04+、Debian 8+、CentOS 7+)，可以创建`/etc/docker/daemon.json`文件，并写入如下内容：
 
