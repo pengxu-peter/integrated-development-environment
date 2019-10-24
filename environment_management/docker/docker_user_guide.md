@@ -45,6 +45,16 @@ sudo dpkg -i nvidia-container-runtime_2.0.0+docker18.06.1-1_amd64.deb
 sudo dpkg -i nvidia-docker2_2.0.3+docker18.06.1-1_all.deb
 ```
 
+成功安装后，理论上，打开文件'/etc/docker/daemon.json'，会出现以下配置信息：
+```bash
+"runtimes": {
+    "nvidia": {
+      "path": "/usr/bin/nvidia-container-runtime",
+      "runtimeArgs": []
+    }
+  }
+```
+
 ## 2.4 在线安装
 
 ```bash
