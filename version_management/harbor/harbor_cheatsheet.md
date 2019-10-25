@@ -40,9 +40,12 @@ docker login -u <user_name> -p <password> <harbor server url>
 
 ## 3.2 推送镜像
 推送镜像至私服前，需要先给镜像打上标签，打标签格式为   
+```bash
 docker tag 镜像名:标签 私服地址/仓库项目名/镜像名:标签   
-例如将原来为docker.io/openjdk:latest的镜像打标签为 harbor.do.proxima-ai.com/test/openjdk:latest   
-docker tag docker.io/openjdk:latest  harbor.do.proxima-ai.com/test/openjdk:latest   
+docker tag docker.io/openjdk:latest  harbor.do.proxima-ai.com/test/openjdk:latest
+#将原来为docker.io/openjdk:latest的镜像打标签为 harbor.do.proxima-ai.com/test/openjdk:latest   
+```
+
 <p align="center">
     <img src="imgs/harbor_1.png" height = "80" >
 </p>
