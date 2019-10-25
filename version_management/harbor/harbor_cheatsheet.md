@@ -34,6 +34,7 @@ service docker restart
 # 3. 账号登录
 docker login -u <user_name> -p <password> <harbor server url> 
 # docker login -u test -p Test987654 http://harbor.do.proxima-ai.com
+# docker login -u alpha -p Alpha987654 http://harbor.do.proxima-ai.com
 
 ```
 
