@@ -15,15 +15,18 @@
     - [Windows操作系统SSH远程linux直接开发](visual_studio/linux/linux_vs_guide.md)
     - [Windows操作系统SSH远程linux进行CMake开发](visual_studio/linux_cmake/linux_cmake_vs_guide.md)
   
-3. Anaconda
+3. CMake
+    - [CMake使用技巧](cmake/cmake_user_guide.md)
+
+4. Anaconda
     - [python第三发库安装](anaconda/python_lib_install/python_lib_install_guide.md)
     - [Ubuntu环境tensorflow_gpu环境搭建](anaconda/tensorflow_gpu_install/tensorflow_gpu_install_guide.md)
   
-4. 开发环境搭建
+5. 开发环境搭建
     - [虚拟环境搭建](environment_management/virtualenv/virtualenv_user_guide.md)
     - [docker搭建](environment_management/docker/docker_user_guide.md)
 
-5. 版本管理
+6. 版本管理
     - [Git](version_management/git/git_cheatsheet.md)
     - [SVN](version_management/svn/svn_cheatsheet.md)
     - [CONAN](version_management/conan/conan_user_guide.md)
