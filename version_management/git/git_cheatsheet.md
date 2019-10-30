@@ -44,10 +44,18 @@ git push
 ```
 
 ## 3.3 代码合并
+### 3.3.1 代码直接merge
 ```bash
 git clone <仓库>
 git checkout <分支a>
-git merge <分支b>
+git merge <分支b>        
+```
+### 3.3.2 代码本地合并
+```bash
+# 这种方式可以有效减少commit次数
+git stash save "save message"  # 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。
+git stash list  #查看stash了哪些存储
+git stash pop #命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}，如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}
 ```
 
 ## 3.4 代码仓库备份迁移
