@@ -1,0 +1,98 @@
+FROM nvcr.io/nvidia/tensorflow:19.06-py3
+MAINTAINER gupc@fosun.com
+LABEL version="1.0"
+
+ENV PATH=/usr/local/bin:$PATH\
+    LANG=C.UTF-8\
+    WORK_PATH=/home\
+    _MAKE_FILE_PATH=file
+
+# uninstall python3.5 preinstalled packages
+RUN pip freeze | egrep -v '(python-apt|pycurl|pygobject|cloudpickle)' | xargs pip uninstall -y
+
+# sys:install some common libs and add third source to install python3.6 and gcc-7
+RUN apt-get update \
+  && apt-get install -y \
+	 build-essential \
+	 software-properties-common \
+	 wget \
+	 telnet \
+	 vim \
+	 nano \
+  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
+  && add-apt-repository -y ppa:jonathonf/python-3.6 \
+  && apt-get update \
+  && apt-get install -y python3.6 python3.6-dev\
+  && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 100 \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python3.6 100 \
+  && apt-get install -y \
+   python3-pip\
+   libsm6\
+   libxrender1\
+   libxext6\
+  && python3.6 -m pip install --upgrade pip setuptools
+
+# gcc
+RUN apt-get install -y\
+					gcc-7\
+					g++-7\
+					openmpi-bin\
+					openmpi-doc\
+					libopenmpi-dev
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 100 \
+  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100 \
+  && update-alternatives --install /usr/bin/cpp cpp-bin /usr/bin/cpp-7 100 \
+  && apt-get clean
+
+
+WORKDIR $WORK_PATH
+COPY $_MAKE_FILE_PATH/tensorflow_gpu-*.whl ./
+
+# python-lib
+RUN pip3 install --no-cache-dir SimpleITK==1.1.0\
+                 numpy==1.15.4\
+	         scipy==1.1.0\
+	         matplotlib==3.0.2\
+		 pandas==0.23.4\
+		 sympy==1.1.1\
+		 nose==1.3.7\
+		 requests==2.20.1\
+		 scikit-image==0.14.2\
+		 Crypto==1.4.1\
+		 pycrypt==0.7.2\
+		 pycrypto==2.6.1\
+		 opencv-python==3.4.3.18\
+		 vtk==8.1.1\
+		 joblib==0.12.5\
+		 h5py==2.9.0\
+		 six==1.11.0\
+	         tqdm==4.26.0\
+		 scikit-learn==0.20.1\
+		 stomp.py==4.1.21\
+		 pydicom==1.2.0\
+		 easydict==1.9\
+		 cython==0.26.1\
+                 rpy2==3.0.3\
+                 pywavelets==1.0.0\
+	         pyradiomics==2.1.2\
+		 trimesh==2.38.8\
+		 Shapely==1.6.4.post1\
+		 nvidia-ml-py3==7.352.0\
+		 psutil==5.5.0\
+                 ipython\
+                 ITK==4.13.2\
+                 tensorflow_gpu-*.whl\
+                 torch==1.0.1\
+                 torchvision==0.2.1\
+                 keras==2.2.4\
+                 keras_resnet==0.2.0
+
+#clean
+RUN rm -rf /workspace $WORK_PATH/tensorflow_gpu-*.whl
+
+# deploy
+COPY $_MAKE_FILE_PATH/startup.sh /usr/local/bin/startup.sh
+
+# run
+ENTRYPOINT ["sh"]
+CMD ["/usr/local/bin/startup.sh"]

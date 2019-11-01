@@ -1,0 +1,21 @@
+version: '1.0'
+services:
+  alpha_devel:
+    image: alpha-devel:1.0
+    restart: always
+    runtime: nvidia
+    environment:
+      - LANG=C.UTF-8
+    ports:
+      - "102:22" #SSH
+      - "30001:30001" #jupyter
+      - "31001:31001" #tensorboard
+    security_opt:
+      - seccomp:unconfined
+    container_name: alpha-devel-1.0
+    volumes:
+      - /home:/home
+      - /hdd:/hdd
+    network_mode:
+      bridge
+    shm_size: 48G
