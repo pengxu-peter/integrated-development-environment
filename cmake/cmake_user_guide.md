@@ -106,11 +106,11 @@ INSTALL(TARGETS PipelinePulmonaryHalf
 ```bash
 #将制定的.h文件install到include目录
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/inc/PipelinePulmonary3DFactory.h
-               ${CMAKE_CURRENT_SOURCE_DIR}/inc/PipelinePulmonary3DFactory_export.h
-			   ${CMAKE_CURRENT_SOURCE_DIR}/inc/PipelinePulmonary3DFactory.h
-			   ${CMAKE_CURRENT_SOURCE_DIR}/inc/IFPipelinePulmonaryOut.h
-			   ${CMAKE_CURRENT_SOURCE_DIR}/inc/IFPipelinePulmonaryIn.h
-			   DESTINATION include)
+               ${CMAKE_CURRENT_SOURCE_DIR}/inc/               PipelinePulmonary3DFactory_export.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/inc/PipelinePulmonary3DFactory.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/inc/IFPipelinePulmonaryOut.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/inc/IFPipelinePulmonaryIn.h
+               DESTINATION include)
 ```
 
 4. install 任意文件

@@ -1,0 +1,19 @@
+version: '2.4'
+services:
+  alpha_devel:
+    image: harbor.do.proxima-ai.com/alpha/alpha-deploy:1.2
+    restart: always
+    runtime: nvidia
+    environment:
+      - LANG=C.UTF-8
+    ports:
+      - "102:22" #SSH
+    security_opt:
+      - seccomp:unconfined
+    container_name: alpha-deploy-1.2-demo
+    volumes:
+      - /home:/home
+    tty: true
+    network_mode:
+      bridge
+    shm_size: 48G

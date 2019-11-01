@@ -165,3 +165,13 @@ docker system df
 # 清楚所有无效 image 和 container
 docker system prune
 ```
+
+# 5 DockerFile
+
+示例：
+```bash
+#目录“demo/dockerfile”.
+bash buildsh
+docker-compose up -d
+```
+

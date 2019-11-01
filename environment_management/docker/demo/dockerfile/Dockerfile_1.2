@@ -1,0 +1,111 @@
+FROM nvcr.io/nvidia/cuda:10.1-devel-ubuntu16.04
+MAINTAINER pengxu_peter@foxmail.com
+LABEL version="1.2"
+
+ENV PATH=/usr/local/bin:$PATH\
+    LANG=C.UTF-8\
+    INSTALL_PATH=/opt/install/\
+    THIRD_PATH=/opt/third/\
+    COMPANY_PATH=/opt/proxima/\
+    WORK_PATH=/opt/alpha/\
+    _MAKE_FILE_PATH=file
+
+# sys:install some common libs and add third source to install python3.6 and gcc-7
+RUN apt-get update \
+  && apt-get install -y \
+         build-essential \
+         software-properties-common \
+         wget \
+         telnet \
+         vim \
+         nano \
+  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
+  && add-apt-repository -y ppa:jonathonf/python-3.6 \
+  && apt-get update \
+  && apt-get install -y python3.6 python3.6-dev\
+  && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 100 \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python3.6 100 \
+  && apt-get install -y \
+   python3-pip\
+   libsm6\
+   libxrender1\
+   libxext6\
+  && python3.6 -m pip install --upgrade pip setuptools
+
+# gcc
+RUN apt-get install -y\
+    gcc-7\
+    g++-7\
+    openmpi-bin\
+    openmpi-doc\
+    libopenmpi-dev
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 100 \
+   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100 \
+   && update-alternatives --install /usr/bin/cpp cpp-bin /usr/bin/cpp-7 100 \
+   && apt-get clean
+
+# CMake
+WORKDIR $INSTALL_PATH
+RUN wget https://cmake.org/files/v3.13/cmake-3.13.4.tar.gz  && tar -xvzf cmake-3.13.4.tar.gz
+WORKDIR $INSTALL_PATH/cmake-3.13.4
+RUN ./bootstrap \
+    && make && make install
+
+# install rysnc ssh, gdb, sudo, git
+RUN apt-get update \
+    && apt-get install libasound2 -y \
+    && apt-get install sudo -y \
+    && apt-get install openssh-server -y \
+    && apt-get install gdb gdbserver -y \
+    && apt-get install rsync -y \
+    && apt-get install git -y \
+    && apt-get install xorg -y \
+    && apt-get clean
+
+# config ssh
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config \
+  && sed -i '$a X11UseLocalhost no' /etc/ssh/sshd_config \
+  && echo "root:123456" | chpasswd
+
+# install conan and nvidia python lib
+RUN pip3 install conan==1.18.1
+RUN pip3 install nvidia-ml-py3==7.352.0
+RUN pip3 install psutil==5.5.0
+# install zliblg(conan need)
+RUN apt-get update
+RUN apt-get install -y zlib1g-dev
+
+# add opencl
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ocl-icd-libopencl1 \
+        clinfo && \
+    rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /etc/OpenCL/vendors && \
+    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+RUN ln -s /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so
+
+# config1 - proxy
+RUN sed -i '$a #export http_proxy=http://172.16.17.164:3128' /etc/profile \
+  && sed -i '$a #export https_proxy=http://172.16.17.164:3128' /etc/profile
+
+# config2 - LD_LIBRARY
+RUN sed -i '$a export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/opt/third/lib:/opt/alpha/lib:/opt/proxima/lib:$LD_LIBRARY_PATH' /etc/profile \
+  && sed -i '$a export PATH=/usr/local/cuda/bin:/opt/third/bin:/opt/alpha/bin:/opt/proxima/bin:$PATH' /etc/profile
+
+# config3 - conan address
+RUN conan remote add local http://172.16.100.221:8083/artifactory/api/conan/ConanLibraries
+RUN conan remote add cloud http://conan.do.proxima-ai.com:8083/artifactory/api/conan/ConanLibraries
+
+# clean
+RUN rm -Rf $INSTALL_PATH/*
+
+# deploy
+COPY $_MAKE_FILE_PATH/startup.sh /usr/local/bin/startup.sh
+WORKDIR $WORK_PATH
+
+# run
+ENTRYPOINT ["sh"]
+CMD ["/usr/local/bin/startup.sh"]
