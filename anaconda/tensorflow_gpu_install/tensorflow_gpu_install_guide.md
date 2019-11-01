@@ -165,25 +165,3 @@ sudo /opt/anaconda2/bin/pip install package_name==#.#.#
 #常用的包（除anaconda自带的以外）
 opencv-python, vtk, SimpleITK, tqdm, pydicom, tensorflow-gpu, keras, torch
 ```
-
-## 2.7 (备选)配置jupyter-notebook
-```bash
-cd ~
-jupyter-notebook --generate-config
-#会在根目录下生成.jupyter文件夹
-vim .jupyter/jupyter_notebook_config.py
-#在最末尾添加以下代码
-c.NotebookApp.ip='*'
-c.NotebookApp.port=10801
-c.NotebookApp.open_browser=False
-c.NotebookApp.password="password"
-#分别对应 允许所有ip登录，登录端口号为10801，不自动打开浏览器和登录密码，其中"password"，也就是要输的密码，由以下方式产生
-python
-#进入python
-from notebook.auth import passwd
-passwd()
-#然后输入你想要的密码，并确认，之后屏幕上会打印出一串sha开头的字符串，连引号一起copy到上面"password"对应的位置，保存退出
-cd ~
-nohup jupyter-notebook &
-#即可开启notebook
-```

@@ -166,12 +166,19 @@ docker system df
 docker system prune
 ```
 
+- 容器交互
+
+<p align="center">
+    <img src="imgs/docker2.png" height = "120" >
+</p>
+
+
 # 5 DockerFile
 
 示例：
 ```bash
-#目录“demo/dockerfile”.
-bash buildsh
+#目录“demo/dockerfile_cpp”, “demo/dockerfile_python”.
+bash build.sh
 docker-compose up -d
 ```
 
