@@ -32,8 +32,9 @@ svn delete <文件或目录>
 svn commit                     # 直接在弹出的窗口写tag并完成上传
 svn commit -m "message to add" #直接在命令行完成tag编写
 
-# 将当前svn目录同步到最新的版本
-svn update
+# 切换版本
+svn update              # 将当前svn目录同步到最新的版本
+svn update -r <version> # 将当前svn目录同步到指定的版本
 
 # 查看当前版本信息
 svn info
