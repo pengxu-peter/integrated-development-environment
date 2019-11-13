@@ -28,6 +28,9 @@ svn add <文件或目录>
 # 在svn体系中删除文件或目录
 svn delete <文件或目录>
 
+# 在svn体系中修改文件或目录
+svn update <文件或目录>
+
 # 上传
 svn commit                     # 直接在弹出的窗口写tag并完成上传
 svn commit -m "message to add" #直接在命令行完成tag编写
