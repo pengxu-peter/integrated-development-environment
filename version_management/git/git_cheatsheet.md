@@ -49,6 +49,11 @@ git push
 git clone <仓库>
 git checkout <分支a>
 git merge <分支b>        
+#举例：（将docker_dev分支合并到4.8分支中）
+git clone http://git.do.proxima-ai.com/cn.aitrox.ai/alpha.git #拉取所有代码
+git checkout -b docker_dev origin/docker_dev #在本地建立docker_dev仓库，并切换过去
+git checkout -b docker_dev origin/docker_dev #在本地建立4.8仓库，并切换过去
+git merge --no-ff docker_dev #开始merge，如果有conflict，会有提示返回，修改后提交
 ```
 ### 3.3.2 代码本地合并
 ```bash
