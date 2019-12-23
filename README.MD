@@ -14,6 +14,8 @@
 2. Visual Studio
     - [Windows操作系统SSH远程linux直接开发](visual_studio/linux/linux_vs_guide.md)
     - [Windows操作系统SSH远程linux进行CMake开发](visual_studio/linux_cmake/linux_cmake_vs_guide.md)
+    - [Windows操作系统本地直接开发](visual_studio/windows/windows_vs_guide.md)
+    - [Windows操作系统本地CMake开发](visual_studio/windows_cmake/windows_cmake_vs_guide.md)
   
 3. CMake
     - [CMake使用技巧](cmake/cmake_user_guide.md)

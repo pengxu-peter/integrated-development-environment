@@ -88,9 +88,19 @@ ssh root@172.16.100.57 -p 101   #登录密码：默认设置的123456
 ![alt text](imgs/vs_config_6.png "vs_config_status")
 
 ## 3.3 项目debug
+### 3.3.1 一般项目debug
 1. 选中debug项目文件：如下图位置1所示，选中所需debug的项目文件。
 ![alt text](imgs/vs_config_7.png "vs_config_status")
 2. 运行：添加断点，直接点击运行，结果如下图：
 ![alt text](imgs/vs_config_8.png "vs_config_status")
+
+### 3.3.2 带参数项目debug
+1. 选中debug项目文件：如下图所示，选中所需debug的项目文件。
+![alt text](imgs/debug1.png "vs_config_status")
+2. 选择设置文件，如下图所示
+![alt text](imgs/debug2.png "vs_config_status")
+3. 在设置文件中添加参数
+![alt text](imgs/debug3.png "vs_config_status")
+4. 运行：添加断点，直接点击运行
 
 # 4 参考文件
