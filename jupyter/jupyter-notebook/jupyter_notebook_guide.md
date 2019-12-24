@@ -14,10 +14,10 @@ jupyter-notebook --generate-config
 #会在根目录下生成.jupyter文件夹
 vim .jupyter/jupyter_notebook_config.py
 #在最末尾添加以下代码
-c.NotebookApp.ip='*'
-c.NotebookApp.port=10801
-c.NotebookApp.open_browser=False
-c.NotebookApp.password="password"
+c.NotebookApp.ip='0.0.0.0'
+c.NotebookApp.password = u'sha1:b3da55935a15:0e5ddaddb305b62d36b77dca9a01b0a4544804cb'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 10801
 #分别对应 允许所有ip登录，登录端口号为10801，不自动打开浏览器和登录密码，其中"password"，也就是要输的密码，由以下方式产生
 python
 #进入python
@@ -26,7 +26,8 @@ passwd()
 #然后输入你想要的密码，并确认，之后屏幕上会打印出一串sha开头的字符串，连引号一起copy到上面"password"对应的位置，保存退出
 cd ~
 nohup jupyter-notebook &
-#即可开启notebook
+#浏览器打开以下地址即可开启notebook
+<ip_address>:<port>
 ```
 
 ## 2.2 配置不同conda环境下的启动
