@@ -38,4 +38,5 @@
     - [CONAN](version_management/conan/conan_user_guide.md)
     - [Harbor](version_management/harbor/harbor_cheatsheet.md)
 
-
+7. DevOps
+    - [Jenkens](devops/jenkins/jenkins_guide.md)
