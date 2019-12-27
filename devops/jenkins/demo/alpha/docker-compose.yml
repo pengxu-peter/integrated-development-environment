@@ -1,0 +1,26 @@
+version: '2'
+services:
+  jenkins-slave-alpha:
+    image: aitrox/jenkins-slave-alpha:1.0
+    restart: always
+    container_name: jenkins-slave-alpha
+    environment:
+      JENKINS_URL: http://jenkins.do.proxima-ai.com
+      JENKINS_SECRET: 2e554ba340d0a8cd0eea4921a9683fa0b183d4303766702e2b33ac273af73ac9
+      JENKINS_AGENT_NAME: alpha-agent
+      JENKINS_AGENT_WORKDIR: /jenkins/alpha-agent
+      JAVA_OPTS: "-Xmx1000m -Dorg.jenkinsci.plugins.gitclient.Git.timeOut=60"
+    user: root
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/resolv.conf:/etc/resolv.conf
+      - ./data/jenkins:/jenkins
+      - ./data/opt:/opt
+      - /home/xupeng/.ssh/:/root/.ssh/
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: devops

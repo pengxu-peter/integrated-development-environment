@@ -1,0 +1,71 @@
+//针对锐影系统构建的pipeline  dev(221)
+
+pipeline {
+    agent none
+    environment {
+      FULL_VERSION_NUM="${VER_NUM}"+'.'+ "${currentBuild.number}";
+      PRODUCTNAME="alpha";
+      //存档根路径
+      ARCHIVES_ROOT_PATH="/data/devops/package";
+      //当前版本存档根路径
+      ARCHIVES_PRODUCT_PATH="${ARCHIVES_ROOT_PATH}/${PRODUCTNAME}/${FULL_VERSION_NUM}"
+      TAG_INFO = "${BRANCH_NAME_RING}"+'_'+"${FULL_VERSION_NUM}";
+
+      WORKSPACE="/data/alpha/${FULL_VERSION_NUM}";
+
+      ALPHA_ACL="alpha_acl";
+      URL_ALPHA_ACL="http://git.do.proxima-ai.com/cn.aitrox.ai/alpha-acl.git";
+      ALPHA="alpha";
+      URL_ALPHA="http://git.do.proxima-ai.com/cn.aitrox.ai/alpha.git";
+      HEMODYNAMICS="hemodynamics";
+      URL_HEMODYNAMICS="http://git.do.proxima-ai.com/cn.aitrox.ai/hemodynamics.git";
+
+      PERFORMANCE_MONITOR="performance_monitor";
+      URL_PERFORMANCE_MONITOR="http://git.do.proxima-ai.com/cn.aitrox.ai/performance_monitor.git"
+
+    }
+
+    stages{
+
+        stage('build alpha'){
+            agent{
+                label 'alpha-agent'
+            }
+             steps {
+                 clone(ALPHA_ACL,BRANCH_NAME_ALPHA_ACL,URL_ALPHA_ACL)
+                 clone(ALPHA,BRANCH_NAME_ALPHA,URL_ALPHA)
+                 clone(HEMODYNAMICS,BRANCH_NAME_HEMODYNAMICS,URL_HEMODYNAMICS)
+                 clone(PERFORMANCE_MONITOR,BRANCH_NAME_PERFORMANCE_MONITOR,URL_PERFORMANCE_MONITOR)
+                 compileAlpha(ALPHA)
+                 compileAlpha(HEMODYNAMICS)
+                 compileAlpha(ALPHA_ACL)
+             }
+        }
+        stage('send alpha'){
+            agent{
+                label 'alpha-agent'
+            }
+             steps {
+                 sendAlpha()
+                 buildName FULL_VERSION_NUM
+             }
+        }
+
+    }
+}
+
+def clone(dirName,branName,url){
+       dir(dirName){
+         checkout([$class: 'GitSCM', branches: [[name: branName]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${CREDENTIAL}", url: url]]])
+         }
+}
+def compileAlpha(dirName){
+    dir(dirName){
+        sh "bash build.sh"
+    }
+}
+def sendAlpha(){
+sh "ssh ${USER}@${RECEVIE_IP} 'rm -rf ${WORKSPACE};mkdir -p  ${WORKSPACE}'";
+sh "scp -r /opt/alpha  /opt/third  /opt/acl /opt/install/*  ${USER}@${RECEVIE_IP}:${WORKSPACE}"
+}
+
