@@ -39,4 +39,4 @@
     - [Harbor](version_management/harbor/harbor_cheatsheet.md)
 
 7. DevOps
-    - [Jenkens](devops/jenkins/jenkins_guide.md)
+    - [Jenkins](devops/jenkins/jenkins_guide.md)

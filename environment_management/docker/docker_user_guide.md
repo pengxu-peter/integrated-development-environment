@@ -182,3 +182,5 @@ bash build.sh
 docker-compose up -d
 ```
 
+# 6 相关参考资料
+[利用容器技术打造AI公司技术中台](https://edu.csdn.net/course/detail/27072?utm_source=new1)
