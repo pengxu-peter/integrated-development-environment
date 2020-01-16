@@ -134,3 +134,4 @@ Host 172.16.100.57
 # 4. 参考文件
 1. [官方remote-ssh教程](https://code.visualstudio.com/docs/remote/ssh)
 2. [远程开发环境搭建 Visual Studio Code + Remote-SSH](https://blog.csdn.net/u013475983/article/details/91861437)
+3. [* Docker+VSCode配置属于自己的炼丹炉](Docker+VSCode配置属于自己的炼丹炉)
