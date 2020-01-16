@@ -183,4 +183,5 @@ docker-compose up -d
 ```
 
 # 6 相关参考资料
-[利用容器技术打造AI公司技术中台](https://edu.csdn.net/course/detail/27072?utm_source=new1)
+- [利用容器技术打造AI公司技术中台](https://edu.csdn.net/course/detail/27072?utm_source=new1)
+- [胃肠癌AI病理辅助诊断系统的方法与落地](https://edu.csdn.net/huiyiCourse/detail/1111?utm_source=new1)
